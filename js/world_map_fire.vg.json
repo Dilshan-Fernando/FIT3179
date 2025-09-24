@@ -32,7 +32,7 @@
         "key": "Entity",
         "fields": ["Annual"]
       }
-    },
+    }
   ],
   "mark": {"type": "geoshape"},
   "encoding": {
