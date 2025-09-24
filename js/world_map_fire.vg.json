@@ -1,9 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
-  "height": 450,
-  "title": "Earthquakes of magnitude 4 or large between 4 Oct 2020 and 10 Oct 2020",
-  "projection": {"type": "equalEarth"},
+  "width": 1600,
+  "height": 900,
+  "title": "Total Hectares of Land burnt in Wildfires in 2025",
+  "projection": {"type": "equirectangular"},
   "layer": [
     {
       "data": {
@@ -12,7 +12,13 @@
       },
       "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
     },
-
+    {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/new.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+      },
 
 
 
@@ -39,11 +45,59 @@
     "color": {
       "field": "Annual",
       "type": "quantitative",
-      "scale": {"type": "linear"}
+      
+      "scale": {"type": "log"}
     }
   }
 
+    },
+
+    {
+        "data": {
+    "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/new.topojson",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.ISO_A3",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
+        },
+        "key": "Code",
+        "fields": ["Annual"]
+      }
     }
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Annual",
+      "type": "quantitative",
+      
+      "scale": {"type": "log","range":["white","orange","red"]}
+    }
+  }
+
+    },
+    {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne_110m.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_admin_0_boundary_lines_land"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne_110m.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_land"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
+      }
+
+     
+
+
     
   ]
 }
