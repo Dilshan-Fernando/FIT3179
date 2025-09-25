@@ -7,8 +7,8 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
-        "format": {"type": "topojson", "feature": "oceans"}
+        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
+        "format": {"type": "topojson", "feature": "ne_50m_ocean"}
       },
       "mark": {"type": "geoshape", "fill": "skyblue"}
     },
