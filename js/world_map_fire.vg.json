@@ -1,31 +1,35 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 1600,
-  "height": 900,
+  "height": 800,
+  "background":"lightblue",
   "title": "Total Hectares of Land burnt in Wildfires in 2025",
   "projection": {"type": "equirectangular"},
   "layer": [
     {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne_110m.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_land"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
+      },
+    {
+    "data": {
+        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne_110m.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+    },
+    "mark": {"type": "geoshape", "fill": null, "stroke": "darkgray"}
+    },
+        {
       "data": {
-        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/new.topojson",
+        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne_110m.topojson",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
-      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "black"}
     },
     {
-        "data": {
-          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/new.topojson",
-          "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
-        },
-        "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
-      },
-
-
-
-
-    {
       "data": {
-    "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/new.topojson",
+    "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne_110m.topojson",
     "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
   },
   "transform": [
@@ -54,7 +58,7 @@
 
     {
         "data": {
-    "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/new.topojson",
+    "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne_110m.topojson",
     "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
   },
   "transform": [
@@ -86,14 +90,9 @@
           "format": {"type": "topojson", "feature": "ne_110m_admin_0_boundary_lines_land"}
         },
         "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
-      },
-      {
-        "data": {
-          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne_110m.topojson",
-          "format": {"type": "topojson", "feature": "ne_110m_land"}
-        },
-        "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
       }
+      
+      
 
      
 
