@@ -4,6 +4,28 @@
   "height": 800,
   "title": "Most recently recorded landmass burnt by wildfires in every country",
   "projection": {"type": "equirectangular"},
+  "params":[{
+      "name": "country_select",
+      "value": ["None"],
+      "bind": {
+        "input": "select",
+        "options": [
+          ["None"],
+          ["Australia"],
+          ["United States of America"],
+          ["Canada"],
+          ["Brazil"],
+          ["Russia"],
+          ["China"],
+          ["India"],
+          ["Argentina"],
+          ["South Africa"],
+          ["South Korea"]
+        ],
+        "name": "Country Select: "
+      }
+    
+    }],
   "layer": [
     {
       "data": {
@@ -41,7 +63,11 @@
         },
         "key": "Entity",
         "fields": ["Annual","Year"]
+        
       }
+    },
+    {
+      "filter": "datum.properties.NAME == country_select || country_select == 'None'"
     }
   ],
   "mark": {"type": "geoshape","stroke":"black"},
@@ -50,7 +76,7 @@
       "field": "Annual",
       "type": "quantitative",
       
-      "scale": {"type": "log"}
+      "scale": {"type": "log","range":["white","orange","red"]}
     },
     "tooltip": [
         {"field": "properties.NAME", "type": "nominal","title":"Country"},
@@ -75,6 +101,9 @@
         "key": "Code",
         "fields": ["Annual","Year"]
       }
+    },
+    {
+      "filter": "datum.properties.NAME == country_select || country_select == 'None'"
     }
   ],
   "mark": {"type": "geoshape"},
@@ -85,6 +114,10 @@
       
       "scale": {"type": "log","range":["white","orange","red"]},
       "title": "Hectares of land burnt"
+    },
+    "opacity": {
+      "condition": {"param": "country_select", "value": 1},
+      "value": 0.1
     },
     "tooltip": [
         {"field": "properties.NAME", "type": "nominal","title":"Country"},
