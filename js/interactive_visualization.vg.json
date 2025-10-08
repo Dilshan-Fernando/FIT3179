@@ -21,7 +21,19 @@
         "name": "Country Select: "
       }
     
-    }],
+    },
+    {
+      "name": "map_select",
+      "value": ["Wildfire"],
+      "bind": {
+        "input": "select",
+        "options": [
+          ["Wildfire"],
+          ["Rainfall"]
+        ],
+        "name": "Map Select: "}
+    }
+  ],
   "hconcat": [
     {"width": 1100,
   "height": 600,
@@ -51,6 +63,8 @@
       },
       "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "black"}
     },
+
+
     {
       "data": {
       "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
@@ -71,7 +85,7 @@
             }
           },
           {
-            "filter": "datum.properties.NAME == country_select || country_select == 'None'"
+            "filter": "datum.properties.NAME == country_select && map_select == 'None' || country_select == 'None' && map_select == 'None' || datum.properties.NAME == country_select && map_select == 'Wildfire' ||country_select == 'None' && map_select == 'Wildfire'"
           }
         ],
      "mark": {"type": "geoshape","stroke":"black"},
@@ -80,7 +94,8 @@
           "field": "Annual",
           "type": "quantitative",
           
-          "scale": {"type": "log","range":["white","orange","red"]}
+          "scale": {"type": "log","range":["white","orange","red"]},
+          "legend": null
         },
         "tooltip": [
             {"field": "properties.NAME", "type": "nominal","title":"Country"},
@@ -89,7 +104,6 @@
             ]
       }
     },
-
     {
         "data": {
     "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne1.topojson",
@@ -107,8 +121,8 @@
       }
     },
     {
-      "filter": "datum.properties.NAME == country_select || country_select == 'None'"
-    }
+            "filter": "datum.properties.NAME == country_select && map_select == 'None' || country_select == 'None' && map_select == 'None' || datum.properties.NAME == country_select && map_select == 'Wildfire' ||country_select == 'None' && map_select == 'Wildfire'"
+          }
   ],
   "mark": {"type": "geoshape"},
   "encoding": {
@@ -131,6 +145,92 @@
   }
 
     },
+
+
+    {
+      "data": {
+      "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
+      "format": {"type": "topojson", "feature": "ne_50m_admin_0_countries"}
+      },
+      "transform": 
+        [
+          {
+            "lookup": "properties.NAME",
+            "from": 
+            {
+              "data": {
+                "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/average-precipitation-per-year.csv"
+              },
+              "key": "Entity",
+              "fields": ["Annual precipitation","Year"]
+            
+            }
+          },
+          {
+            "filter": "datum.properties.NAME == country_select && map_select == 'Rainfall' ||country_select == 'None' && map_select == 'Rainfall'"
+          }
+        ],
+     "mark": {"type": "geoshape","stroke":"black"},
+      "encoding": {
+        "color": {
+          "field": "Annual precipitation",
+          "type": "quantitative",
+          
+          "scale": {"type": "log","range":["white","lightgreen","green"]}
+        },
+        "tooltip": [
+            {"field": "properties.NAME", "type": "nominal","title":"Country"},
+            {"field": "Annual precipitation", "type": "quantitative","title":"Annual rainfall in mm", "format":"0.1f"},
+            {"field": "Year", "type": "nominal"}
+            ]
+      }
+    },
+    {
+        "data": {
+    "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne1.topojson",
+    "format": {"type": "topojson", "feature": "ne_50m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.ISO_A3",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/average-precipitation-per-year.csv"
+        },
+        "key": "Code",
+        "fields": ["Annual precipitation","Year"]
+      }
+    },
+    {
+            "filter": "datum.properties.NAME == country_select && map_select == 'Rainfall' ||country_select == 'None' && map_select == 'Rainfall'"
+          }
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Annual precipitation",
+      "type": "quantitative",
+      
+      "scale": {"type": "log","range":["white","lightgreen","green"]},
+      "title": "Annual rainfall in mm",
+      "legend": null
+    },
+    "opacity": {
+      "condition": {"param": "country_select", "value": 1},
+      "value": 0.1
+    },
+    "tooltip": [
+        {"field": "properties.NAME", "type": "nominal","title":"Country"},
+        {"field": "Annual precipitation", "type": "quantitative","title":"Annual rainfall in mm", "format":"0.1f"},
+        {"field": "Year", "type": "nominal"}
+        ]
+  }
+
+    },
+
+
+
+
     {
         "data": {
           "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
@@ -138,7 +238,12 @@
         },
         "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
       }
-    ]},
+    ],
+  "resolve": {
+      "scale": {
+        "color": "independent"
+      }
+    }  },
     {"vconcat": [
     {"width": 550,
       "height": 300,
@@ -153,15 +258,15 @@
      "mark": {"type": "line"},
       "encoding": {
         "x": {"field": "Year", "type": "temporal"},
-        "y": {"field": "Annual", "type": "quantitative"},
-        "color": {"field": "Entity", "type": "nominal","scale": {"scheme": "reds"}}
+        "y": {"field": "Annual", "type": "quantitative","title":"Annual Land burnt"},
+        "color": {"field": "Entity", "type": "nominal"}
       }
     },
     {"width": 550,
       "height": 300,
       "data": 
       {
-        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual_rainfall.csv"
+        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/average-precipitation-per-year.csv"
       },
       "transform":
       [
@@ -170,11 +275,17 @@
      "mark": {"type": "line"},
       "encoding": {
         "x": {"field": "Year", "type": "temporal"},
-        "y": {"field": "Annual", "type": "quantitative"},
-        "color": {"field": "Entity", "type": "nominal","scale": {"scheme": "reds"}}
+        "y": {"field": "Annual precipitation", "type": "quantitative"},
+        "color": {"field": "Entity", "type": "nominal"}
       }
     }
-     ]
-    }
+     ],
+      "resolve": {
+      "scale": {
+        "color": "independent"
+      }
+    }  
+  }
     
-]}
+]
+}
