@@ -1,0 +1,311 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "params":[{
+      "name": "country_select",
+      "value": ["None"],
+      "bind": {
+        "input": "select",
+        "options": [
+          ["None"],
+          ["Australia"],
+          ["Iran"],
+          ["Canada"],
+          ["Brazil"],
+          ["Russia"],
+          ["China"],
+          ["India"],
+          ["Argentina"],
+          ["South Africa"],
+          ["South Korea"]
+        ],
+        "name": "Country Select: "
+      }
+    
+    },
+    {
+      "name": "map_select",
+      "value": ["Wildfire"],
+      "bind": {
+        "input": "select",
+        "options": [
+          ["Wildfire"],
+          ["Rainfall"]
+        ],
+        "name": "Map Select: "}
+    }
+  ],
+  "hconcat": [
+    {"width": 1100,
+  "height": 600,
+  "title": "Most recently recorded landmass burnt by wildfires in every country",
+  "projection": {"type": "equirectangular"},
+  
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne1.topojson",
+        "format": {"type": "topojson", "feature": "ne_50m_ocean"}
+      },
+      "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "darkgray"}
+    },
+    
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne1.topojson",
+        "format": {"type": "topojson", "feature": "ne_50m_admin_0_countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "black"}
+    },
+
+
+    {
+      "data": {
+      "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
+      "format": {"type": "topojson", "feature": "ne_50m_admin_0_countries"}
+      },
+      "transform": 
+        [
+          {
+            "lookup": "properties.NAME",
+            "from": 
+            {
+              "data": {
+                "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
+              },
+              "key": "Entity",
+              "fields": ["Annual","Year"]
+            
+            }
+          },
+          {
+            "filter": "datum.properties.NAME == country_select && map_select == 'None' || country_select == 'None' && map_select == 'None' || datum.properties.NAME == country_select && map_select == 'Wildfire' ||country_select == 'None' && map_select == 'Wildfire'"
+          }
+        ],
+     "mark": {"type": "geoshape","stroke":"black"},
+      "encoding": {
+        "color": {
+          "field": "Annual",
+          "type": "quantitative",
+          
+          "scale": {"type": "log","range":["white","orange","red"]},
+          "legend": null
+        },
+        "tooltip": [
+            {"field": "properties.NAME", "type": "nominal","title":"Country"},
+            {"field": "Annual", "type": "quantitative","title":"Hectares burnt", "format":"0.1f"},
+            {"field": "Year", "type": "temporal"}
+            ]
+      }
+    },
+    {
+        "data": {
+    "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne1.topojson",
+    "format": {"type": "topojson", "feature": "ne_50m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.ISO_A3",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
+        },
+        "key": "Code",
+        "fields": ["Annual","Year"]
+      }
+    },
+    {
+            "filter": "datum.properties.NAME == country_select && map_select == 'None' || country_select == 'None' && map_select == 'None' || datum.properties.NAME == country_select && map_select == 'Wildfire' ||country_select == 'None' && map_select == 'Wildfire'"
+          }
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Annual",
+      "type": "quantitative",
+      
+      "scale": {"type": "log","range":["white","orange","red"]},
+      "title": "Hectares of land burnt"
+    },
+    "opacity": {
+      "condition": {"param": "country_select", "value": 1},
+      "value": 0.1
+    },
+    "tooltip": [
+        {"field": "properties.NAME", "type": "nominal","title":"Country"},
+        {"field": "Annual", "type": "quantitative","title":"Hectares burnt", "format":"0.1f"},
+        {"field": "Year", "type": "temporal"}
+        ]
+  }
+
+    },
+
+
+    {
+      "data": {
+      "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
+      "format": {"type": "topojson", "feature": "ne_50m_admin_0_countries"}
+      },
+      "transform": 
+        [
+          {
+            "lookup": "properties.NAME",
+            "from": 
+            {
+              "data": {
+                "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/average-precipitation-per-year.csv"
+              },
+              "key": "Entity",
+              "fields": ["Annual precipitation","Year"]
+            
+            }
+          },
+          {
+            "filter": "datum.properties.NAME == country_select && map_select == 'Rainfall' ||country_select == 'None' && map_select == 'Rainfall'"
+          }
+        ],
+     "mark": {"type": "geoshape","stroke":"black"},
+      "encoding": {
+        "color": {
+          "field": "Annual precipitation",
+          "type": "quantitative",
+          
+          "scale": {"type": "log","range":["white","lightgreen","green"]}
+        },
+        "tooltip": [
+            {"field": "properties.NAME", "type": "nominal","title":"Country"},
+            {"field": "Annual precipitation", "type": "quantitative","title":"Annual rainfall in mm", "format":"0.1f"},
+            {"field": "Year", "type": "nominal"}
+            ]
+      }
+    },
+    {
+        "data": {
+    "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne1.topojson",
+    "format": {"type": "topojson", "feature": "ne_50m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.ISO_A3",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/average-precipitation-per-year.csv"
+        },
+        "key": "Code",
+        "fields": ["Annual precipitation","Year"]
+      }
+    },
+    {
+            "filter": "datum.properties.NAME == country_select && map_select == 'Rainfall' ||country_select == 'None' && map_select == 'Rainfall'"
+          }
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Annual precipitation",
+      "type": "quantitative",
+      
+      "scale": {"type": "log","range":["white","lightgreen","green"]},
+      "title": "Annual rainfall in mm",
+      "legend": null
+    },
+    "opacity": {
+      "condition": {"param": "country_select", "value": 1},
+      "value": 0.1
+    },
+    "tooltip": [
+        {"field": "properties.NAME", "type": "nominal","title":"Country"},
+        {"field": "Annual precipitation", "type": "quantitative","title":"Annual rainfall in mm", "format":"0.1f"},
+        {"field": "Year", "type": "nominal"}
+        ]
+  }
+
+    },
+
+
+
+
+    {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_admin_0_boundary_lines_land"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
+      }
+    ],
+  "resolve": {
+      "scale": {
+        "color": "independent"
+      }
+    } },
+    {"width": 550,
+     "height": 300,
+     "layer":
+    [
+        {
+            "data": 
+            {
+                "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
+            },
+            "transform":
+            [
+                {"filter": "datum.Entity == country_select ||country_select == 'None' && datum.Entity == 'Australia'||country_select == 'None' && datum.Entity == 'Iran'||country_select == 'None' && datum.Entity == 'Canada'||country_select == 'None' && datum.Entity == 'Brazil'||country_select == 'None' && datum.Entity == 'Russia'||country_select == 'None' && datum.Entity == 'China'||country_select == 'None' && datum.Entity == 'India'||country_select == 'None' && datum.Entity == 'Argetina'||country_select == 'None' && datum.Entity == 'South Africa'||country_select == 'None' && datum.Entity == 'South Korea' "}
+            ],
+            "mark": {"type": "line"},
+            "encoding": {
+                "x": {"field": "Year", "type": "temporal"},
+                "y": {"field": "Annual", "type": "quantitative","title":"Annual Land burnt"},
+                "color": {"field": "Entity", "type": "nominal"},
+                "tooltip": [
+                    {"field": "Annual", "type": "quantitative","title":"Hectares burnt", "format":"0.1f"},
+                    {"field": "Year", "type": "temporal"},
+                    {"field":"Entity","type":"nominal","title":"Country"}
+                    ]
+            }
+        
+        },
+        {
+        
+            "data": {"values": [{"x": 1950, "y": 1800}, {"x": 1950, "y": 8}]},
+            "layer":
+            [
+                {
+                "mark": {"type": "rule", "color": "red"},
+                "encoding": {
+                    "x": {"datum": 2023,"axis":null},
+                    "x2": {"datum": 2024,"axis":null},
+                    "y": {"datum": 1800},
+                    "y2": {"datum": 1800}                
+                    
+                }
+                },
+                {
+                "mark": {"type": "rule", "color": "red","size": 40, "opacity":0.3},
+                "encoding": {
+                    "x": {"field": "x", "type": "quantitative"},
+                    "y": {"field": "y", "type": "quantitative"},
+                    "opacity":{}
+                }
+                },
+                {
+                    "mark": "text",
+                    "encoding": 
+                    {
+                        "x": {"datum":1950},
+                        "y": {"datum":1600},
+                        "text": {"datum":"El Nino Period"}
+                    }
+                }
+            ]
+        }
+    ]
+}
+    
+]
+}
