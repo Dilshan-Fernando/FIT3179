@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "hconcat": [
+    {"width": 550,
+     "height": 300,
+     "layer":
+    [
+        {
+            "data": 
+            {
+                "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/combined_temperature.csv"
+            },
+            "transform":
+            [
+                {"filter": "datum.Country == 'Australia'|| datum.Country == 'Iran'||datum.Country == 'Canada'||datum.Country == 'Brazil'||datum.Country == 'Russia'|| datum.Country == 'Japan'||datum.Country == 'India'|| datum.Country == 'Argetina'||datum.Country == 'South Africa'||datum.Country == 'South Korea' "}
+            ],
+            "mark": {"type": "line"},
+            "encoding": {
+                "x": {"field": "Year", "type": "temporal"},
+                "y": {"field": "Annual mean", "type": "quantitative","title":"Average temperature"},
+                "color": {"field": "Country", "type": "nominal"},
+                "tooltip": [
+                    {"field": "Annual mean", "type": "quantitative","title":"Average temperature", "format":"0.1f"},
+                    {"field": "Year", "type": "temporal"},
+                    {"field":"Country","type":"nominal","title":"Country"}
+                    ]
+            }
+        
+        }
+    ]
+}
+    
+]
+}

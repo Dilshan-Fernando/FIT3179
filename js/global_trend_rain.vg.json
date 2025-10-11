@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "hconcat": [
+    {"width": 550,
+     "height": 300,
+     "layer":
+    [
+        {
+            "data": 
+            {
+                "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
+            },
+            "transform":
+            [
+                {"filter": "datum.Entity == country_select ||country_select == 'None' && datum.Entity == 'Australia'||country_select == 'None' && datum.Entity == 'Iran'||country_select == 'None' && datum.Entity == 'Canada'||country_select == 'None' && datum.Entity == 'Brazil'||country_select == 'None' && datum.Entity == 'Russia'||country_select == 'None' && datum.Entity == 'China'||country_select == 'None' && datum.Entity == 'India'||country_select == 'None' && datum.Entity == 'Argetina'||country_select == 'None' && datum.Entity == 'South Africa'||country_select == 'None' && datum.Entity == 'South Korea' "}
+            ],
+            "mark": {"type": "line"},
+            "encoding": {
+                "x": {"field": "Year", "type": "temporal"},
+                "y": {"field": "Annual", "type": "quantitative","title":"Annual Land burnt"},
+                "color": {"field": "Entity", "type": "nominal"},
+                "tooltip": [
+                    {"field": "Annual", "type": "quantitative","title":"Hectares burnt", "format":"0.1f"},
+                    {"field": "Year", "type": "temporal"},
+                    {"field":"Entity","type":"nominal","title":"Country"}
+                    ]
+            }
+        
+        }
+    ]
+}
+    
+]
+}
