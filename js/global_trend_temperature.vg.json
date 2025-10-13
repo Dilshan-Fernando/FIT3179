@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "hconcat": [
-    {"width": 550,
-     "height": 300,
+    {"width": 750,
+     "height": 500,
      "title": "Record of annual temperature over time across different countries",
      "layer":
     [
