@@ -11,13 +11,27 @@
 
 
 <script src="js/wildfire.js"></script>
+<link rel="stylesheet" href="css/style.css">
 <title>World Wildfire Map </title>
 </head>
 <body>
-<h1 style="text-align: center"></h1>
-<div id="interactive_map"></div>
-<div id="global_temp"> </div>
-<div id="global_rain"> </div>
+<h1 style="text-align: center"> TITLE OF VISUALIZATION</h1>
+<div class = "Row">
+    <div id="interactive_map"></div>
+</div>
+<div class = "Row"> <p>We are looking to investigate the global affects of environment and how the potential changes in rainfall and temperatures may contribute to a change 
+    in wildfire severity and occurence. Select a country using the boxes above to look further into the data about these countries! You can have a look at the rainfall worldwide as well by selecting "Rainfall" in the map select dropdown.
+</p></div>
+<div class = "Row">
+    <div  class = "Column" id="global_temp"> </div>
+    <div class = "Column"><p>On the left is a comparison of the global temperature changes from countries of varying environments. It's clear to see that over the past 30 years,
+        there as been very little variation in the average temperature. This is expected and shows that at least in this short term, there are no apparent trends that are easily determined.
+        The average rainfall chart on the right helps to show just how varied the amount of rain can be for different climates with countries such as Indonesia situated in the tropics having significantly more rain,
+        with a larger variance on it's annual rainfall
+    </p></div>
+    <div  class = "Column" id="global_rain"> </div>
+</div>
+
 </div>
 </body>
 </html>

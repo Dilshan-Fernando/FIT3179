@@ -35,7 +35,9 @@
     }
   ],
   "hconcat": [
-    {"width": 1100,
+    {"vconcat":
+    [
+      {"width": 1150,
   "height": 600,
   "title": "Most recently recorded landmass burnt by wildfires in every country",
   "projection": {"type": "equirectangular"},
@@ -243,86 +245,153 @@
       "scale": {
         "color": "independent"
       }
-    }  },
+      }  
+      },
+      {
+        "width":1150,
+        "height":100,
+        "data": 
+              {
+                  "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
+              },
+              "transform":
+              [
+                  {"filter": "datum.Entity ==country_select"}
+              ],
+        "mark":"text",
+        "encoding":{"text":{"field":"Entity","type": "nominal","fontSize":20}
+                  }
+
+      }
+    ]},
     {"vconcat": [
-    {"width": 550,
-     "height": 300,
-     "layer":
+    {"layer": 
     [
+      {"width": 550,
+     "height": 300,
+     "title": "Annual landmass burnt in wildfires over time in a given country",
+     "layer":
+      [
+          {
+              "data": 
+              {
+                  "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
+              },
+              "transform":
+              [
+                  {"filter": "country_select == 'None' && datum.Entity == 'Australia'||country_select == 'None' && datum.Entity == 'Iran'||country_select == 'None' && datum.Entity == 'Canada'||country_select == 'None' && datum.Entity == 'Brazil'||country_select == 'None' && datum.Entity == 'Russia'||country_select == 'None' && datum.Entity == 'Japan'||country_select == 'None' && datum.Entity == 'Indonesia'||country_select == 'None' && datum.Entity == 'Argentina'||country_select == 'None' && datum.Entity == 'South Africa'||country_select == 'None' && datum.Entity == 'South Korea' "}
+              ],
+              "mark": {"type": "line"},
+              "encoding": {
+                  "x": {"field": "Year", "type": "temporal"},
+                  "y": {"field": "Annual", "type": "quantitative","title":"Annual Land burnt"},
+                  "color": {"field": "Entity", "type": "nominal"},
+                  "tooltip": [
+                      {"field": "Annual", "type": "quantitative","title":"Hectares burnt", "format":"0.1f"},
+                      {"field": "Year", "type": "temporal"},
+                      {"field":"Entity","type":"nominal","title":"Country"}
+                      ]
+              }
+          
+          },
+          {
+              "data": 
+              {
+                  "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
+              },
+              "transform":
+              [
+                  {"filter": "datum.Entity == country_select"}
+              ],
+              "mark": {"type": "bar"},
+              "encoding": {
+                  "x": {"field": "Year", "type": "temporal"},
+                  "y": {"field": "Annual", "type": "quantitative","title":"Annual Land burnt"},
+                  "color": {"field": "Entity", "type": "nominal"},
+                  "tooltip": [
+                      {"field": "Annual", "type": "quantitative","title":"Hectares burnt", "format":"0.1f"},
+                      {"field": "Year", "type": "temporal"},
+                      {"field":"Entity","type":"nominal","title":"Country"}
+                      ]
+              }
+          
+          },
+          {
+          
+              "data": {"values": [{"x": 1950, "y": 1800}, {"x": 1950, "y": 8}]},
+              "layer":
+              [
+                  {
+                  "mark": {"type": "rule", "color": "red"},
+                  "encoding": {
+                      "x": {"datum": 2023,"axis":null},
+                      "x2": {"datum": 2024,"axis":null},
+                      "y": {"datum": 1800},
+                      "y2": {"datum": 1800}                
+                      
+                  }
+                  },
+                  {
+                  "mark": {"type": "rule", "color": "red","size": 40, "opacity":0.3},
+                  "encoding": {
+                      "x": {"field": "x", "type": "quantitative"},
+                      "y": {"field": "y", "type": "quantitative"},
+                      "opacity":{}
+                  }
+                  },
+                  {
+                      "mark": "text",
+                      "encoding": 
+                      {
+                          "x": {"datum":1950},
+                          "y": {"datum":1600},
+                          "text": {"datum":"El Nino Period"}
+                      }
+                  }
+              ]
+          }
+        ]
+    }]},
+    {
+      "layer": 
+      [
         {
-            "data": 
-            {
-                "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/annual-area-burnt-per-wildfire/annual-area-burnt-per-wildfire.csv"
-            },
-            "transform":
+          "width": 550,
+          "height": 300,
+          "title": "Number of wildfires occuring in a given country",
+          "data": 
+          {
+            "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/Wildfire.csv"
+          },
+          "transform":
             [
-                {"filter": "datum.Entity == country_select ||country_select == 'None' && datum.Entity == 'Australia'||country_select == 'None' && datum.Entity == 'Iran'||country_select == 'None' && datum.Entity == 'Canada'||country_select == 'None' && datum.Entity == 'Brazil'||country_select == 'None' && datum.Entity == 'Russia'||country_select == 'None' && datum.Entity == 'Japan'||country_select == 'None' && datum.Entity == 'Indonesia'||country_select == 'None' && datum.Entity == 'Argentina'||country_select == 'None' && datum.Entity == 'South Africa'||country_select == 'None' && datum.Entity == 'South Korea' "}
+                {"filter": "country_select == 'None' && datum.Entity == 'Australia'||country_select == 'None' && datum.Entity == 'Iran'||country_select == 'None' && datum.Entity == 'Canada'||country_select == 'None' && datum.Entity == 'Brazil'||country_select == 'None' && datum.Entity == 'Russia'||country_select == 'None' && datum.Entity == 'Japan'||country_select == 'None' && datum.Entity == 'Indonesia'||country_select == 'None' && datum.Entity == 'Argentina'||country_select == 'None' && datum.Entity == 'South Africa'||country_select == 'None' && datum.Entity == 'South Korea' "}
             ],
-            "mark": {"type": "line"},
-            "encoding": {
-                "x": {"field": "Year", "type": "temporal"},
-                "y": {"field": "Annual", "type": "quantitative","title":"Annual Land burnt"},
-                "color": {"field": "Entity", "type": "nominal"},
-                "tooltip": [
-                    {"field": "Annual", "type": "quantitative","title":"Hectares burnt", "format":"0.1f"},
-                    {"field": "Year", "type": "temporal"},
-                    {"field":"Entity","type":"nominal","title":"Country"}
-                    ]
-            }
-        
+          "mark": {"type": "line"},
+          "encoding": {
+            "x": {"field": "Year", "type": "temporal"},
+            "y": {"field": "Annual number of fires", "type": "quantitative"},
+            "color": {"field": "Entity", "type": "nominal","legend":null}
+          }
         },
         {
-        
-            "data": {"values": [{"x": 1950, "y": 1800}, {"x": 1950, "y": 8}]},
-            "layer":
-            [
-                {
-                "mark": {"type": "rule", "color": "red"},
-                "encoding": {
-                    "x": {"datum": 2023,"axis":null},
-                    "x2": {"datum": 2024,"axis":null},
-                    "y": {"datum": 1800},
-                    "y2": {"datum": 1800}                
-                    
-                }
-                },
-                {
-                "mark": {"type": "rule", "color": "red","size": 40, "opacity":0.3},
-                "encoding": {
-                    "x": {"field": "x", "type": "quantitative"},
-                    "y": {"field": "y", "type": "quantitative"},
-                    "opacity":{}
-                }
-                },
-                {
-                    "mark": "text",
-                    "encoding": 
-                    {
-                        "x": {"datum":1950},
-                        "y": {"datum":1600},
-                        "text": {"datum":"El Nino Period"}
-                    }
-                }
-            ]
-        }
-    ]
-    },
-    {"width": 550,
-      "height": 300,
-      "data": 
-      {
-        "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/Wildfire.csv"
-      },
-      "transform":
-      [
-        {"filter": "datum.Entity == country_select ||country_select == 'None' && datum.Entity == 'Australia'||country_select == 'None' && datum.Entity == 'Iran'||country_select == 'None' && datum.Entity == 'Canada'||country_select == 'None' && datum.Entity == 'Brazil'||country_select == 'None' && datum.Entity == 'Russia'||country_select == 'None' && datum.Entity == 'Japan'||country_select == 'None' && datum.Entity == 'Indonesia'||country_select == 'None' && datum.Entity == 'Argentina'||country_select == 'None' && datum.Entity == 'South Africa'||country_select == 'None' && datum.Entity == 'South Korea' "}
-      ],
-     "mark": {"type": "line"},
-      "encoding": {
-        "x": {"field": "Year", "type": "temporal"},
-        "y": {"field": "Annual number of fires", "type": "quantitative"},
-        "color": {"field": "Entity", "type": "nominal","legend":null}
-      }
+              "data": 
+              {
+                  "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/Wildfire.csv"
+              },
+              "transform":
+              [
+                  {"filter": "datum.Entity == country_select"}
+              ],
+              "mark": {"type": "bar"},
+          "encoding": {
+            "x": {"field": "Year", "type": "temporal"},
+            "y": {"field": "Annual number of fires", "type": "quantitative"},
+            "color": {"value": "red"}
+          }
+          
+          }
+      ]
     }
      ],
       "resolve": {

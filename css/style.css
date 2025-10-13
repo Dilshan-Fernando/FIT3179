@@ -1,0 +1,23 @@
+html, body {
+  height: 100%; /* Ensures html and body take full viewport height */
+  background-image: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient from left to right, orange to peach */
+  min-height: 100vh; /* Ensures the gradient covers the full viewport height */
+  margin: 0; /* Removes default body margin */
+  padding: 0;
+}
+
+.Row {
+    display: table;
+    width: 2020px; /*Optional*/
+    text-align: center;
+    align-items: flex-start;
+    border: 5px;
+    font-size: 20px;
+    
+}
+.Column {
+    display: table-cell;
+    text-align: center;
+    vertical-align: top;
+    
+}

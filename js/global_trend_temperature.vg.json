@@ -3,6 +3,7 @@
   "hconcat": [
     {"width": 550,
      "height": 300,
+     "title": "Record of annual temperature over time across different countries",
      "layer":
     [
         {
