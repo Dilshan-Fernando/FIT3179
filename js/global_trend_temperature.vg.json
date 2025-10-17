@@ -4,9 +4,32 @@
   "hconcat": [
     {"width": 800,
      "height": 500,
-     "title": {"text":"Record of annual temperature over time across different countries","fontSize":20},
+     "title": {"text":"Record of annual temperature over time across different countries","fontSize":25},
      "layer":
     [
+        {
+        "data": {
+    "values": [
+      {}
+    ]
+  },
+  "mark": "rule",
+  "encoding": {
+    "y": {
+      "datum": 15
+    },
+    "color": {
+      "value": "black"
+    },
+    "size": {
+      "value": 3
+    },
+    "strokeDash": {
+      "value": [5, 5] 
+    }
+  }
+        },    
+
         {
             "data": 
             {
@@ -16,11 +39,11 @@
             [
                 {"filter": "datum.Country == 'Australia'|| datum.Country == 'Iran'||datum.Country == 'Canada'||datum.Country == 'Brazil'||datum.Country == 'Russia'|| datum.Country == 'Japan'||datum.Country == 'Indonesia'|| datum.Country == 'Argentina'||datum.Country == 'South Africa'||datum.Country == 'South Korea' "}
             ],
-            "mark": {"type": "line"},
+            "mark": {"type": "line","size":3},
             "encoding": {
-                "x": {"field": "Year", "type": "temporal"},
-                "y": {"field": "Annual Mean", "type": "quantitative","title":"Average temperature"},
-                "color": {"field": "Country", "type": "nominal","legend":{"offset":20,"labelFontSize":14}},
+                "x": {"field": "Year", "type": "temporal","axis": {"labelFontSize": 15,"titleFontSize":20}},
+                "y": {"field": "Annual Mean", "type": "quantitative","title":"Average temperature","axis": {"labelFontSize": 15,"titleFontSize":20}},
+                "color": {"field": "Country", "type": "nominal","legend":{"offset":20,"labelFontSize":14, "symbolStrokeWidth": 10}},
                 "tooltip": [
                     {"field": "Annual Mean", "type": "quantitative","title":"Average temperature", "format":"0.1f"},
                     {"field": "Year", "type": "temporal"},
@@ -29,6 +52,8 @@
             }
         
         }
+        
+
     ]
 }
     

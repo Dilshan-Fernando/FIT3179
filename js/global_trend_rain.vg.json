@@ -4,7 +4,7 @@
   "hconcat": [
     {"width": 750,
       "height": 500,
-      "title": {"text":"Record of annual rainfall over time across different countries","fontSize":20},
+      "title": {"text":"Record of annual rainfall over time across different countries","fontSize":25},
       "data": 
       {
         "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/average-precipitation-per-year.csv"
@@ -13,10 +13,10 @@
       [
         {"filter": "datum.Entity == 'Australia'||datum.Entity == 'Iran'||datum.Entity == 'Canada'||datum.Entity == 'Brazil'||datum.Entity == 'Russia'||datum.Entity == 'Japan'|| datum.Entity == 'Indonesia'||datum.Entity == 'Argentina'||datum.Entity == 'South Africa'||datum.Entity == 'South Korea' "}
       ],
-     "mark": {"type": "line"},
+     "mark": {"type": "line","size":3},
       "encoding": {
-        "x": {"field": "Year", "type": "temporal"},
-        "y": {"field": "Annual precipitation", "type": "quantitative"},
+        "x": {"field": "Year", "type": "temporal","axis": {"labelFontSize": 15,"titleFontSize":20}},
+        "y": {"field": "Annual precipitation", "type": "quantitative","axis": {"labelFontSize": 15,"titleFontSize":20},"title":"Annual rainfall (mm)"},
         "color": {"field": "Entity", "type": "nominal","legend":null}
       }
     }
