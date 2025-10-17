@@ -51,7 +51,34 @@
                 ]
             }
         
-        }
+        },
+      {"data": {
+        "values": [
+          {
+            "lon1": 1800,
+            "lat1": 100
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center", 
+        "baseline": "middle", 
+        "color": "black",
+        "fontWeight": "bold",
+        "fontSize": 15,
+        "dx":625,
+        "dy":170
+      },
+      "encoding": {
+        
+        "longitude": {"field": "lon1", "aggregate": "mean"},
+       
+        "latitude": {"field": "lat1", "aggregate": "mean"},
+        
+        "text": {"value": "Global mean temperature is 15 degrees Celcius"}
+      }
+    }
         
 
     ]

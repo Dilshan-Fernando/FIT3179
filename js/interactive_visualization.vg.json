@@ -48,12 +48,65 @@
   "projection": {"type": "equirectangular"},
   
   "layer": [
+     
     {
       "data": {
         "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne1.topojson",
         "format": {"type": "topojson", "feature": "ne_50m_ocean"}
       },
       "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon1": 180,
+            "lat1": -25,
+            "lon2": -180,
+            "lat2": 25
+          }
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "fill": "lightgrey",
+        "opacity": 0.5,
+        "stroke": "darkred",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "longitude": {"field": "lon1"},
+        "latitude": {"field": "lat1"},
+        "longitude2": {"field": "lon2"},
+        "latitude2": {"field": "lat2"}
+      }
+    },
+    {"data": {
+        "values": [
+          {
+            "lon1": 1800,
+            "lat1": 100
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center", 
+        "baseline": "middle", 
+        "color": "black",
+        "fontWeight": "bold",
+        "fontSize": 20,
+        "dx":150,
+        "dy":300
+      },
+      "encoding": {
+        
+        "longitude": {"field": "lon1", "aggregate": "mean"},
+       
+        "latitude": {"field": "lat1", "aggregate": "mean"},
+        
+        "text": {"value": "Tropical area"}
+      }
     },
     {
       "data": {
@@ -250,7 +303,7 @@
 
 
 
-
+    
     {
         "data": {
           "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/js/ne.topojson",
@@ -350,7 +403,13 @@
                   "encoding": {
                       "x": {"field": "x", "type": "quantitative"},
                       "y": {"field": "y", "type": "quantitative"},
-                      "opacity":{}
+                      "opacity": {
+      "condition": {
+        "test": "country_select == 'None'",
+        "value": 0.3
+      },
+      "value": 0
+    }
                   }
                   },
                   {
@@ -359,13 +418,55 @@
                       {
                           "x": {"datum":1950},
                           "y": {"datum":1600},
-                          "text": {"datum":"El Nino Period"}
+                          "text": {"datum":"El Nino Period"},
+                          "opacity": {
+      "condition": {
+        "test": "country_select == 'None'",
+        "value": 1
+      },
+      "value": 0
+    }
                       }
                   }
               ]
           }
         ]
-    }]},
+    },
+    {"data": {
+        "values": [
+          {
+            "lon1": 1800,
+            "lat1": 100
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center", 
+        "baseline": "middle", 
+        "color": "black",
+        "fontWeight": "bold",
+        "fontSize": 15,
+        "dx":400,
+        "dy":100
+      },
+      "encoding": {
+        
+        "longitude": {"field": "lon1", "aggregate": "mean"},
+       
+        "latitude": {"field": "lat1", "aggregate": "mean"},
+        
+        "text": {"value": "Black Summer - Australia "},
+        "opacity": {
+      "condition": {
+        "test": "country_select == 'None'",
+        "value": 1
+      },
+      "value": 0
+    }
+      }
+    }
+  ]},
     {
       "layer": 
       [
@@ -389,9 +490,48 @@
           "encoding": {
               "x": {"field": "Year", "type": "temporal","axis":{"labelFontSize": 12,"titleFontSize":15}},
             "y": {"field": "Annual number of fires", "type": "quantitative","axis":{"labelFontSize": 12,"titleFontSize":15},"title":"Number of fires"},
-            "color": {"field": "Entity", "type": "nominal","legend":null}
+            "color": {"field": "Entity", "type": "nominal","legend":null},
+            "tooltip": [
+                      {"field": "Annual number of fires", "type": "quantitative","title":"Number of fires", "format":"0.1f"},
+                      {"field": "Year", "type": "temporal","timeUnit":"year"},
+                      {"field":"Entity","type":"nominal","title":"Country"}
+                      ]
           }
         },
+        {"data": {
+        "values": [
+          {
+            "lon1": 1800,
+            "lat1": 100
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center", 
+        "baseline": "middle", 
+        "color": "black",
+        "fontWeight": "bold",
+        "fontSize": 15,
+        "dx":250,
+        "dy":20
+      },
+      "encoding": {
+        
+        "longitude": {"field": "lon1", "aggregate": "mean"},
+       
+        "latitude": {"field": "lat1", "aggregate": "mean"},
+        
+        "text": {"value": "87580 Fires - Brazil "},
+        "opacity": {
+      "condition": {
+        "test": "country_select == 'None'",
+        "value": 1
+      },
+      "value": 0
+    }
+      }
+    },
         {
               "data": 
               {
