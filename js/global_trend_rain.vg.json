@@ -1,9 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background":"transparent",
   "hconcat": [
     {"width": 750,
       "height": 500,
-      "title": "Record of annual rainfall over time across different countries",
+      "title": {"text":"Record of annual rainfall over time across different countries","fontSize":20},
       "data": 
       {
         "url": "https://raw.githubusercontent.com/Dilshan-Fernando/FIT3179/refs/heads/main/data/average-precipitation-per-year.csv"

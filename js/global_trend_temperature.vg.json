@@ -1,9 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background":"transparent",
   "hconcat": [
-    {"width": 750,
+    {"width": 800,
      "height": 500,
-     "title": "Record of annual temperature over time across different countries",
+     "title": {"text":"Record of annual temperature over time across different countries","fontSize":20},
      "layer":
     [
         {
@@ -19,7 +20,7 @@
             "encoding": {
                 "x": {"field": "Year", "type": "temporal"},
                 "y": {"field": "Annual Mean", "type": "quantitative","title":"Average temperature"},
-                "color": {"field": "Country", "type": "nominal"},
+                "color": {"field": "Country", "type": "nominal","legend":{"offset":20,"labelFontSize":14}},
                 "tooltip": [
                     {"field": "Annual Mean", "type": "quantitative","title":"Average temperature", "format":"0.1f"},
                     {"field": "Year", "type": "temporal"},

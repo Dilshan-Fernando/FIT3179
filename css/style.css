@@ -8,11 +8,12 @@ html, body {
 }
 
 .Row {
-    display: table;
+    display: flex;
     width: 100%; /*Optional*/
     text-align: center;
     align-items: center;
     border: 5px;
+    
     
     
 }
@@ -20,18 +21,54 @@ html, body {
     display: table-cell;
     text-align: baseline;
     vertical-align: top;
-    padding: 20px;
     font-size: 20px;
+    width: 50%;
+    align-items: center;
+    background-color: #ffeea4;
+    border-radius: 10px;
     
     
 }
-
+.Column2 {
+    display: table-cell;
+    text-align: baseline;
+    vertical-align: top;
+    font-size: 20px;
+    width: 55%;
+    align-items: center;
+    background-color: #ffeea4;
+    border-radius: 10px;
+    
+    
+}
+.Column3 {
+    display: table-cell;
+    text-align: baseline;
+    vertical-align: top;
+    font-size: 20px;
+    width: 45%;
+    align-items: center;
+    background-color: #ffeea4;
+    border-radius: 10px;
+    
+    
+}
+.Interactive {
+    display: table-cell;
+    text-align: baseline;
+    vertical-align: top;
+    padding: 20px;
+    font-size: 20px;
+    width: 50%;
+    align-items: center;
+    
+    
+}
 h1 {
   font-weight: bold;
   color: #000000;
   font-size: 50px;
   font-family: Arial, sans-serif;
-  border: 1px solid black;
   
 }
 
@@ -44,4 +81,35 @@ h2 {
   border: 1px solid black;
 
 
+}
+
+.main {
+    width: 1920px; 
+    margin: 0 auto; 
+    background-color: #FDFD96;     
+    align-items: center;
+    padding:1%;
+    border-radius: 10px;
+}
+.vega-bindings {
+  display: flex;
+  padding-left: 4.5%;
+  font-size: 20;
+  font-weight: bold;
+  
+}
+
+.banner {
+     background-color: #FFC067;
+    color: white; /* Text color */
+    text-align: center; /* Center align text */
+    padding: 1px;
+    border-radius: 10px;
+}
+
+p{
+  font-size: 20px;
+  background-color: #fccb86;
+  border-radius: 10px;
+  padding: 1%;
 }
