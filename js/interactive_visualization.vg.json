@@ -330,7 +330,34 @@
     "fontWeight":"bold"
   },
      "layer":
-      [
+      [{"data": {
+        "values": [
+          {
+            "lon1": 2,
+            "lat1": 1100
+          }
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "size":200,
+        "xOffset":26,"filled":"true"
+      },
+      "encoding": {
+        
+        "x": {"field": "lon1", "type": "temporal","axis":null},
+       
+        "y": {"field": "lat1", "aggregate": "mean"},
+        "color":{"value":"orange"},
+        "opacity": {
+      "condition": {
+        "test": "country_select == 'None'",
+        "value": 1
+      },
+      "value": 0
+    }
+      }
+    },
           {
               "data": 
               {
@@ -372,7 +399,7 @@
               ],
               "mark": {"type": "bar","size":20},
               "encoding": {
-                  "x": {"field": "Year", "type": "temporal"},
+                  "x": {"field": "Year", "type": "temporal","axis":null},
                   "y": {"field": "Annual", "type": "quantitative","title":"Annual Land burnt"},
                   "color": {"field": "Entity", "type": "nominal"},
                   "tooltip": [
@@ -401,7 +428,7 @@
                   {
                   "mark": {"type": "rule", "color": "red","size": 40, "opacity":0.3},
                   "encoding": {
-                      "x": {"field": "x", "type": "quantitative"},
+                      "x": {"field": "x", "type": "quantitative","axis":null},
                       "y": {"field": "y", "type": "quantitative"},
                       "opacity": {
       "condition": {
@@ -466,10 +493,33 @@
     }
       }
     }
+    
   ]},
     {
       "layer": 
       [
+        {
+                  "data": {
+                "values": [
+                  {
+                    "lon1": 1,
+                    "lat1": 1
+                  }
+                ]
+              },
+              "mark": {
+                "type": "point","filled":true,"color":"#E74C3C","size":200,"xOffset":-187,"yOffset":-140},
+              "encoding": {
+                
+                "opacity": {
+              "condition": {
+                "test": "country_select == 'None'",
+                "value": 1
+              },
+              "value": 0
+            }
+              }
+            },
         {
           "width": 700,
           "height": 300,
@@ -498,40 +548,45 @@
                       ]
           }
         },
-        {"data": {
-        "values": [
+        
+        {
+          "data":
+           {
+              "values": 
+              [
+                {
+                  "lon1": 1800,
+                  "lat1": 100
+                }
+              ]
+           },
+          "mark": 
           {
-            "lon1": 1800,
-            "lat1": 100
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "align": "center", 
-        "baseline": "middle", 
-        "color": "black",
-        "fontWeight": "bold",
-        "fontSize": 15,
-        "dx":250,
-        "dy":20
-      },
-      "encoding": {
-        
-        "longitude": {"field": "lon1", "aggregate": "mean"},
-       
-        "latitude": {"field": "lat1", "aggregate": "mean"},
-        
-        "text": {"value": "87580 Fires - Brazil "},
-        "opacity": {
-      "condition": {
-        "test": "country_select == 'None'",
-        "value": 1
-      },
-      "value": 0
-    }
-      }
-    },
+              "type": "text",
+              "align": "center", 
+              "baseline": "middle", 
+              "color": "black",
+              "fontWeight": "bold",
+              "fontSize": 15,
+              "dx":250,
+              "dy":20
+           },
+           "encoding":
+          {
+              "longitude": {"field": "lon1", "aggregate": "mean"},
+              "latitude": {"field": "lat1", "aggregate": "mean"},
+              "text": {"value": "87580 Fires - Brazil "},
+              "opacity": 
+              {
+                "condition":
+                 {
+                    "test": "country_select == 'None'",
+                    "value": 1
+                 },
+                "value": 0
+              }
+            }
+        },
         {
               "data": 
               {
@@ -554,9 +609,10 @@
           }
           
           }
+        
       ]
     }
-     ],
+    ],
       "resolve": {
       "scale": {
         "color": "independent"
