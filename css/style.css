@@ -9,7 +9,7 @@ html, body {
 
 .Row {
     display: flex;
-    width: 100%; /*Optional*/
+    width: 95%; /*Optional*/
     text-align: center;
     align-items: center;
     border: 5px;

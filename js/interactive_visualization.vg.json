@@ -322,11 +322,11 @@
     {"vconcat": [
     {"layer": 
     [
-      {"width": 700,
+      {"width": 600,
      "height": 300,
      "title":{ 
     "text":"Annual landmass burnt in wildfires over time in each country",
-    "fontSize":25,
+    "fontSize":20,
     "fontWeight":"bold"
   },
      "layer":
@@ -341,7 +341,7 @@
       "mark": {
         "type": "point",
         "size":200,
-        "xOffset":26,"filled":"true"
+        "xOffset":23,"filled":"true"
       },
       "encoding": {
         
@@ -508,7 +508,7 @@
                 ]
               },
               "mark": {
-                "type": "point","filled":true,"color":"#E74C3C","size":200,"xOffset":-187,"yOffset":-140},
+                "type": "point","filled":true,"color":"#E74C3C","size":200,"xOffset":-158,"yOffset":-140},
               "encoding": {
                 
                 "opacity": {
@@ -521,12 +521,12 @@
               }
             },
         {
-          "width": 700,
+          "width": 600,
           "height": 300,
           "title":
           { 
               "text":"Number of wildfires occuring in each country",
-              "fontSize":25
+              "fontSize":20
           },
           "data": 
           {
