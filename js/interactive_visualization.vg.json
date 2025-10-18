@@ -40,10 +40,10 @@
     {"vconcat":
     [
       {"width": 1100,
-  "height": 600,
+  "height": 700,
   "title":{ 
     "text":"Most recently recorded landmass burnt by wildfires in every country",
-    "fontSize":25
+    "fontSize":35
   },
   "projection": {"type": "equirectangular"},
   
@@ -97,7 +97,7 @@
         "fontWeight": "bold",
         "fontSize": 20,
         "dx":150,
-        "dy":300
+        "dy":400
       },
       "encoding": {
         
